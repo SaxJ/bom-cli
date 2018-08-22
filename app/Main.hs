@@ -12,8 +12,8 @@ main :: IO ()
 main = do
   (options, ()) <- simpleOptions
     $(simpleVersion Paths_bom_cli.version)
-    "Header for command line arguments"
-    "Program description, also for command line arguments"
+    "BOM CLI options"
+    "Customise weather display"
     (Options
        <$> switch ( long "verbose"
                  <> short 'v'
