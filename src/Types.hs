@@ -6,7 +6,8 @@ import RIO.Process
 
 -- | Command line arguments
 data Options = Options
-  { optionsVerbose :: !Bool
+  { optionsVerbose :: Bool
+  , optionsCity :: String
   }
 
 data App = App

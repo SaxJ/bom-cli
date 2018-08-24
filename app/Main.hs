@@ -15,10 +15,8 @@ main = do
     "BOM CLI options"
     "Customise weather display"
     (Options
-       <$> switch ( long "verbose"
-                 <> short 'v'
-                 <> help "Verbose output?"
-                  )
+       <$> switch (long "verbose" <> short 'v' <> help "Verbose output?")
+       <*> strOption (long "city" <> short 'c' <> help "Australian city to get weather for.")
     )
     empty
   lo <- logOptionsHandle stderr (optionsVerbose options)
@@ -29,4 +27,4 @@ main = do
           , appProcessContext = pc
           , appOptions = options
           }
-     in runRIO app run
+     in runRIO app (run options)
