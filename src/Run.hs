@@ -40,16 +40,15 @@ displayXML :: String -> IO ()
 displayXML xml = mapM_ displaySection $ sections (~== ("<area>" :: String)) tags
     where
         tags = parseTags xml
-        displayPeriods ls = mapM_ (prettyPrint "header")
+        displayPeriods ls = mapM_ putStrLn
             $ filter (\t -> length t /= 0) $ map (unpack . strip . pack . fromTagText) $ filter isTagText ls
         displaySection tgs = do
-            putStrLn $ fromAttrib "description" $ head tgs
+            (prettyPrint "header") $ fromAttrib "description" $ head tgs
             displayPeriods tgs
 
 prettyPrint :: String -> String -> IO ()
 prettyPrint "header" s = do
-    setSGR [SetColor Foreground Vivid Red]
-    setSGR [SetColor Background Vivid Blue]
+    setSGR [SetColor Foreground Vivid Green]
     putStrLn s
     setSGR [Reset]  -- Reset to default colour scheme
 prettyPrint _ s = prettyPrint "header" s
