@@ -16,12 +16,12 @@ getForecastXML :: String -> IO String
 getForecastXML state = do
     connection <- easyConnectFTP "ftp.bom.gov.au"
     _ <- loginAnon connection
-    (xml,_) <- getbinary connection $ mapCity state
+    (xml,_) <- getbinary connection $ mapState state
     --putStrLn $ show $ extract $ parseTags xml
     return xml
 
-mapCity :: String -> String
-mapCity s =
+mapState :: String -> String
+mapState s =
     let
         pth = "/anon/gen/fwo/"
         mp "wa" = "IDW12400.xml"
