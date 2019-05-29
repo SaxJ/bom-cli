@@ -7,10 +7,8 @@ import System.IO (putStrLn)
 
 run :: Options -> RIO App ()
 run options = do
-  logInfo "We're inside the application!"
-  xml <- liftIO $ getForecastXML $ optionsCity options
-  liftIO $ displayXML xml
-  --liftIO $ putStrLn xml
+  xml <- liftIO $ getForecastXML $ optionsState options
+  liftIO $ displayXML xml $ optionsCity options
 
 getForecastXML :: String -> IO String
 getForecastXML state = do
@@ -36,8 +34,8 @@ mapState s =
     in
         pth ++ (mp s)
 
-displayXML :: String -> IO ()
-displayXML xml = mapM_ displaySection $ sections (~== ("<area>" :: String)) tags
+displayXML :: String -> String -> IO ()
+displayXML xml city = mapM_ displaySection $ sections (~== ("<area>" :: String)) tags
     where
         tags = parseTags xml
         displayPeriods ls = mapM_ putStrLn

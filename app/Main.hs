@@ -16,7 +16,8 @@ main = do
     "Customise weather display"
     (Options
        <$> switch (long "verbose" <> short 'v' <> help "Verbose output?")
-       <*> strOption (long "city" <> short 'c' <> help "Australian city to get weather for.")
+       <*> strOption (long "state" <> short 's' <> help "Australian state to get weather for.")
+       <*> strOption (long "city" <> short 'c' <> help "Nearest city")
     )
     empty
   lo <- logOptionsHandle stderr (optionsVerbose options)
